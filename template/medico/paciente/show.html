@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>Kill Corona Virus - Doctores</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://kit.fontawesome.com/ad755e16d3.js" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+
+    <header class="main-header main-header-home">
+        <img src="{{ url_for('static', filename='images/logo-header.png') }}" alt="">
+        
+        <div class="header-block">
+            <h1><span>{{ session['s_nombreUsuario'] }}</span> <img src="{{ url_for('static', filename='images/admin.png') }}" alt="" class="admin-img"></h1>
+
+            <form action="{{ url_for('logout') }}" method="POST" class="form-top">
+                <button type="submit" class="button-head">Cerrar sesión <i class="fa-solid fa-power-off"></i></button>
+            </form>
+
+        </div>
+    </header>
+
+    <section class="wrap-center wrap-center-inside">
+
+        <h1 class="tit-inside">Información del Paciente</h1>
+
+        <div class="grid-info">
+            <div class="info-block">
+                <img src="{{ url_for('static', filename='images/user.png') }}" alt="">
+            </div>
+
+            <div class="info-block">
+                {% block content %}
+
+                <p><span>Nombre:</span> {{ paciente.s_nombrePaciente }}</p>
+                <p><span>Apellido Paterno:</span> {{ paciente.s_apellidoPaterno }}</p>
+                <p><span>Apellido Materno:</span> {{ paciente.s_apellidoMaterno }}</p>
+                <p><span>RUT:</span> {{ paciente.s_rutPaciente }}</p>
+                <p><span>Fecha Nacimiento:</span> {{ paciente.d_fechaNacimiento }}</p>
+                {% if paciente.fk_id_genero == 1 %}
+                    <p><span>Género:</span> Hombre</p>
+                {% elif paciente.fk_id_genero == 2 %}
+                    <p><span>Género:</span> Mujer</p>
+                {% elif paciente.fk_id_genero == 3 %}
+                    <p><span>Género:</span> Otro</p>
+                {% else %}
+                    <p>Género: {{ paciente.fk_id_genero }}</p>
+                {% endif %}
+
+                {% if paciente.fk_id_fichaMedica %}
+                    <p><a href="{{ url_for('showFichaMedica', paciente_id=paciente.id_paciente, ficha_medica_id=paciente.fk_id_fichaMedica) }}" class="ver-ficha">Ver Ficha Médica</a></p>
+                {% else %}
+                    <p class="no-ficha">No hay ficha médica asociada <a href="{{ url_for('createFichaMedica', paciente_id=paciente_id) }}" class="crear-ficha">Crear nueva ficha médica</a></p>
+                    
+                {% endif %}
+                {% endblock %}
+
+                <a href="/medico/paciente/edit/{{ paciente.id_paciente }}" class="editar-paciente">Editar paciente</a>
+
+                <p><a href="/medico/paciente/allpac" class="volver">Volver al listado</a></p>
+
+
+                
+
+            </div>
+            
+        </div>
+
+       
+
+    </section>
+
+
+    <footer>
+        <p>© Copyright 2023 | by Kill Corona Virus Chile</p>
+    </footer> 
+</body>
+</html>

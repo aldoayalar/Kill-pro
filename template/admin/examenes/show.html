@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Información del Médico</h1>
+
+    <p>Nombre: {{ medico.s_nombreUsuario }}</p>
+    <p>Apellido Paterno: {{ medico.s_apellidoPaterno }}</p>
+    <p>Apellido Materno: {{ medico.s_apellidoMaterno }}</p>
+    <p>RUT: {{ medico.s_rut }}</p>
+    <p>Email: {{ medico.s_email }}</p>
+    <p>Especialidad 1: {{ medico.s_espe1 }}</p>
+    <p>Especialidad 2: {{ medico.s_espe2 }}</p>
+    <p>Especialidad 3: {{ medico.s_espe3 }}</p>
+
+    <p><a href="/admin/medicos/alldocs">Volver al listado</a></p>
+    
+</body>
+</html>

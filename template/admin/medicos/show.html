@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>Kill Corona Virus - Doctores</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://kit.fontawesome.com/ad755e16d3.js" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+
+    <header class="main-header main-header-home">
+        <img src="{{ url_for('static', filename='images/logo-header.png') }}" alt="">
+        
+        <div class="header-block">
+            <h1><span>{{ session['s_nombreUsuario'] }}</span> <img src="{{ url_for('static', filename='images/admin.png') }}" alt="" class="admin-img"></h1>
+
+            <form action="{{ url_for('logout') }}" method="POST" class="form-top">
+                <button type="submit" class="button-head">Cerrar sesión <i class="fa-solid fa-power-off"></i></button>
+            </form>
+
+        </div>
+    </header>
+
+    <section class="wrap-center wrap-center-inside">
+
+        <h1 class="tit-inside">Información del Médico</h1>
+
+        <div class="grid-info">
+            <div class="info-block">
+                <img src="{{ url_for('static', filename='images/user.png') }}" alt="">
+            </div>
+
+            <div class="info-block">
+
+                <p><span>Nombre:</span> {{ medico.s_nombreUsuario }}</p>
+                <p><span>Apellido Paterno:</span> {{ medico.s_apellidoPaterno }}</p>
+                <p><span>Apellido Materno:</span> {{ medico.s_apellidoMaterno }}</p>
+                <p><span>RUT:</span> {{ medico.s_rut }}</p>
+                <p><span>Email:</span> {{ medico.s_email }}</p>
+                <p><span>Especialidad 1:</span> {{ medico.s_espe1 }}</p>
+                <p><span>Especialidad 2:</span> {{ medico.s_espe2 }}</p>
+                <p><span>Especialidad 3:</span> {{ medico.s_espe3 }}</p>
+
+                <p><a href="/admin/medicos/alldocs">Volver al listado</a></p>
+
+            </div>
+            
+        </div>
+
+       
+
+    </section>
+
+
+    <footer>
+        <p>© Copyright 2023 | by Kill Corona Virus Chile</p>
+    </footer> 
+</body>
+</html>

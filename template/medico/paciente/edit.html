@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>Kill Corona Virus - Doctores</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://kit.fontawesome.com/ad755e16d3.js" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+
+    <header class="main-header main-header-home">
+        <img src="{{ url_for('static', filename='images/logo-header.png') }}" alt="">
+        
+        <div class="header-block">
+            <h1><span>{{ session['s_nombreUsuario'] }}</span> <img src="{{ url_for('static', filename='images/admin.png') }}" alt="" class="admin-img"></h1>
+
+            <form action="{{ url_for('logout') }}" method="POST" class="form-top">
+                <button type="submit" class="button-head">Cerrar sesión <i class="fa-solid fa-power-off"></i></button>
+            </form>
+
+        </div>
+    </header>
+
+    <section class="wrap-center wrap-center-forms">
+
+        <div class="text-form">
+            <h1 class="tit-inside">Crear un Paciente</h1>
+
+            <p>Agrega el registro que desee completando los campos que en el siguiente formulario dejamos para ti.</p>
+        </div>
+
+        <form method="post" action="/pacUpdate" enctype="multipart/form-data" onsubmit="return validarFormulario()" class="formulario-kill">
+
+            <span>ID Paciente:</span>
+            <input type="text" name="txtid" id="txtid" value="{{ pacientes.id_paciente }}">
+   
+            <input type="text" name="txtrut" id="txtrut" placeholder="RUT" value="{{ pacientes.s_rutPaciente }}">
+
+            <span>Fecha Nacimiento:</span>
+            <input type="date" name="txtdate" id="txtdate" value="{{ pacientes.d_fechaNacimiento }}">
+        
+            <input type="text" name="txtnombre" id="txtnombre" placeholder="Nombre" value="{{ pacientes.s_nombrePaciente }}">
+        
+            <input type="text" name="txtpaterno" id="txtpaterno" placeholder="Apellido Paterno" value="{{ pacientes.s_apellidoPaterno }}">
+            
+            <input type="text" name="txtmaterno" id="txtmaterno" placeholder="Apellido Materno" value="{{ pacientes.s_apellidoMaterno }}">
+
+
+            <span>Genero</span>
+            <select name="txtgenero" id="txtgenero" class="custom-select">
+                <option value="1" {% if pacientes.fk_id_genero == 1 %}selected{% endif %}>Hombre</option>
+                <option value="2" {% if pacientes.fk_id_genero == 2 %}selected{% endif %}>Mujer</option>
+                <option value="3" {% if pacientes.fk_id_genero == 3 %}selected{% endif %}>Otro</option>
+            </select>
+            <span>Activo</span>
+            <select name="txtactive" id="txtactive" class="custom-select">
+                <option value="1" {% if pacientes.b_activo == 1 %}selected{% endif %}>Activo</option>
+                <option value="0" {% if pacientes.b_activo == 0 %}selected{% endif %}>Desactivo</option>
+            </select>
+
+            
+            <input type="submit" value="Actualizar info Paciente">
+            <a href="{{ url_for('medico') }}" class="cancel">Cancelar</a>
+
+            {% if mensaje %}
+                <div class="alert alert-success" role="alert">
+                    {{ mensaje }}
+                </div>
+            {% endif %}
+        
+            {% if success %}
+                <div class="alert alert-success" role="alert">
+                    ¡Actualización exitosa!
+                </div>
+            {% endif %}
+
+        </form>
+
+        
+
+
+    </section>
+
+    <footer>
+        <p>© Copyright 2023 | by Kill Corona Virus Chile</p>
+    </footer> 
+    
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
