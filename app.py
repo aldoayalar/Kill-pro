@@ -2,8 +2,21 @@ from flask import Flask
 from flask import render_template, request, redirect, Response, url_for, session
 from flask_mysqldb import MySQL,MySQLdb # pip install Flask-MySQLdb
 from functools import wraps
+import mysql.connector
+from mysql.connector import errorcode
 
 app = Flask(__name__, template_folder='template')
+
+
+try:
+    conn = mysql.connector.connect(user='killcorona',
+                                   password='Corona1313',
+                                   database='bdkill',
+                                   host='killcoronabd.mysql.database.azure.com',
+                                   ssl_ca='utils\DigiCertGlobalRootCA.crt.pem')
+except mysql.connector.Error as err:
+    print(err)
+
 
 app.config['MYSQL_HOST'] = 'killcoronabd.mysql.database.azure.com'  # Por ejemplo, 'localhost' o la dirección IP del servidor
 app.config['MYSQL_USER'] = 'killcorona'  # El nombre de usuario para acceder a la base de datos
